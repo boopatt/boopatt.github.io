@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Enterprise RAG Chatbot — Job Finder Assistant | Thenmozhi Boopathy</title>
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="nav-row">
+    <div class="nav-name"><a href="../index.html" style="color:inherit;">Thenmozhi Boopathy</a></div>
+    <nav class="site-nav">
+      <a href="../index.html#about">About</a>
+      <a href="../index.html#projects">Projects</a>
+      <a href="../index.html#experience">Experience</a>
+      <a href="../assets/Thenmozhi_Boopathy_Resume.pdf">Resume</a>
+      <a href="../index.html#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap" style="padding-top:32px;">
+  <div class="breadcrumb"><a href="../index.html#projects">&larr; All projects</a></div>
+
+  <div class="project-header">
+    <h1>Enterprise RAG Chatbot — Job Finder Assistant</h1>
+    <div class="card-meta">Apr &ndash; May 2026 &middot; Associated with Miami University Farmer School of Business (ISA-632)</div>
+    <div class="tags">
+      <span class="tag">Databricks</span><span class="tag">Apache Spark</span><span class="tag">LangChain</span>
+      <span class="tag">Delta Lake</span><span class="tag">MLflow</span><span class="tag">Vector Search</span>
+      <span class="tag">Streamlit</span><span class="tag">Llama 4 Maverick</span>
+    </div>
+    <div class="project-links">
+      <a class="btn btn-primary" href="https://analystjobfinder.streamlit.app/">Try the live app &rarr;</a>
+      <a class="btn btn-secondary" href="https://github.com/boopatt/analystjobfinder">View on GitHub</a>
+    </div>
+  </div>
+
+  <div class="project-body">
+    <p>
+      Built and publicly deployed an enterprise-grade Retrieval-Augmented Generation (RAG) chatbot for searching job
+      listings via natural language queries. Built with a three-person team (Thenmozhi Boopathy, Seth Grace, and Luke
+      Johnson) as part of the ISA-632 course at Miami University's Farmer School of Business, and deployed publicly
+      on Streamlit Community Cloud.
+    </p>
+
+    <h2>Key features</h2>
+    <p>
+      A dual knowledge base combines 37 curated job PDFs (Deloitte, JPMorgan Chase, Amazon) with 2,530 scraped Data
+      Engineer roles. Users search with natural language — e.g. &ldquo;Show me remote managerial data analyst
+      roles&rdquo; — and get verified results; when nothing matches, the system explicitly explains what's available
+      instead. A feedback loop collects thumbs up/down ratings with optional tags and comments (89% positive across
+      18 responses to date).
+    </p>
+
+    <h2>Architecture</h2>
+    <p>
+      Data ingestion parses PDFs via <code>ai_parse_document()</code> and transforms CSV data into a Delta table.
+      Databricks Vector Search indexes the knowledge base, and a LangChain agent using the Llama 4 Maverick LLM with
+      a VectorSearchRetrieverTool handles retrieval and reasoning. The model is served via a Databricks Model Serving
+      endpoint, with a Streamlit UI that preserves chat history and collects user feedback, tracked with
+      <code>mlflow.genai.evaluate()</code> for performance benchmarking.
+    </p>
+
+    <div class="trade-offs">
+      <h2>Known trade-offs</h2>
+      <p style="margin-bottom:0;">
+        Adding the CSV dataset improved coverage for entry-level roles but introduced retrieval noise, showing up as
+        a drop in precision metrics during evaluation. The identified fix is hybrid search — combining semantic
+        similarity with structured metadata filters on seniority, location, and skills.
+      </p>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-links">
+      <a href="mailto:thenmozhi@boopathy.dev">thenmozhi@boopathy.dev</a>
+      <a href="https://github.com/boopatt">GitHub</a>
+      <a href="https://www.linkedin.com/in/boopatt/">LinkedIn</a>
+      <a href="../assets/Thenmozhi_Boopathy_Resume.pdf">Resume (PDF)</a>
+    </div>
+    <div>&copy; 2026 Thenmozhi Boopathy</div>
+  </div>
+</footer>
+
+</body>
+</html>
